@@ -1,0 +1,20 @@
+# Replace <CSVFilePath> with the actual path to your CSV file
+$urls = Import-Csv -Path "YOUR_CSV_FILE_PATH"
+
+foreach ($url in $urls) {
+  
+      # Open the URL in Chrome
+    Start-Process "chrome.exe" -ArgumentList "-incognito", $url.URL
+
+    # Wait for five seconds (7000 milliseconds) to allow the page to load
+    Start-Sleep -Milliseconds 7000
+
+    # Simulate pressing the spacebar to play the video
+    [System.Windows.Forms.SendKeys]::SendWait(" ")
+
+    # Wait for five minutes (300 seconds)
+    Start-Sleep -Seconds 300
+
+    # Close Chrome
+    Stop-Process -Name "chrome"
+}
